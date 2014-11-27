@@ -1,2 +1,3 @@
-import singleton
-print singleton.only_one_var
+import singletone
+
+print singletone.only_one_var
