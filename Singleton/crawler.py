@@ -23,6 +23,10 @@ class Borg(object):
 class Child(Borg):
     pass
 
+class Url(object):
+    def __init__(self, url):
+        self.url = url
+
 class ImageDownloaderThread(threading.Thread):
     """A thread for downloading images in parallel."""
     def __init__(self, thread_id, name, counter):
