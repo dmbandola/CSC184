@@ -8,7 +8,5 @@ from crawler_app import *
 
 @step(u'Given I enter the link url "([^"]*)"')
 def given_i_enter_the_link_url_group1(step, url):
-    img = world.response.img['url-img']
-    img['url'] = url
-    world.img_response = img.submit()
-    assert_equal(world.img_response.status_code, 200)
+    link = Url(url)
+    assert_equal(link, url)

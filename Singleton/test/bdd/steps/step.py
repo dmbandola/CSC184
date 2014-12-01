@@ -8,4 +8,5 @@ from crawler_app import *
 
 @step(u'Given I enter the link url "([^"]*)"')
 def given_i_enter_the_link_url_group1(step, url):
-    dl = ImageDownloaderThread(threading.Thread)
+    link = Url(url)
+    assert_equal(link.url, url)
