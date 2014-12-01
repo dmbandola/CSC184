@@ -24,7 +24,7 @@ class Child(Borg):
     pass
 
 class ImageDownloaderThread(threading.Thread):
-    """A thread for downloading miages in parallel."""
+    """A thread for downloading images in parallel."""
     def __init__(self, thread_id, name, counter):
         threading.Thread.__init__(self)
         self.name = name
