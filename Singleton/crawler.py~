@@ -34,14 +34,14 @@ class ImageDownloaderThread(threading.Thread):
         download_images(self.name)
         print 'Finished thread ', self.name
 
-    def traverse_site(max_links=10):
-        link_parser_singleton = Singleton()
+def traverse_site(max_links=10):
+    link_parser_singleton = Singleton()
 
-        # While we have pages to parse in queue
-        while link_parser_singleton.queue_to_parse:
-            # If collected enough links to download images, return
-            if len(link_parser_singleton.to_visit) == max_links:
-                return
+    # While we have pages to parse in queue
+    while link_parser_singleton.queue_to_parse:
+        # If collected enough links to download images, return
+        if len(link_parser_singleton.to_visit) == max_links:
+            return
 
         url = link_parser_singleton.queue_to_parse.pop()
         
@@ -69,60 +69,61 @@ class ImageDownloaderThread(threading.Thread):
             continue
         
         parsed = urlparse(link_url)
-
         # If link follows to external webpage, skip it
         if parsed.netloc and parsed.netloc != parsed_root.netloc:
-             continue
+            continue
 
         # Construct a full url from a link which can be relative
-        link_url = (parsed.scheme or parsed_root.scheme) + '://' + (parsed.netloc or parsed_root.netloc) + parsed.path or ''
+        link_url = (parsed.scheme or parsed_root.scheme) + '://' + \
+        (parsed.netloc or parsed_root.netloc) + parsed.path or ''
          
         # If link was added previously, skip it
         if link_url in link_parser_singleton.to_visit:
-             continue
+            continue
              
          # Add a link for further parsing
         link_parser_singleton.queue_to_parse = [link_url] + link_parser_singleton.queue_to_parse
     
-    def download_images(thread_name):
-        singleton = Singleton()
-        # While we have pages where we have not download images
-        while singleton.to_visit:
-            url = singleton.to_visit.pop()
+def download_images(thread_name):
+    singleton = Singleton()
+    # While we have pages where we have not download images
+    while singleton.to_visit:
+        url = singleton.to_visit.pop()
             
-            http = httplib2.Http()
-            print thread_name, 'Starting downloading images from', url
+        http = httplib2.Http()
+        print thread_name, 'Starting downloading images from', url
             
-            try:
-                status, response = http.request(url)
-            except Exception:
-                continue
+        try:
+            status, response = http.request(url)
+        except Exception:
+            continue
                 
-            bs = BeautifulSoup(response)
-            # Find all <img> tags
-            images = BeautifulSoup.findAll(bs, 'img')
+        bs = BeautifulSoup(response)
+            
+        # Find all <img> tags
+        images = BeautifulSoup.findAll(bs, 'img')
 
-            for image in images:
-                 # Get image source url which can be absolute or relative
-                 src = image.get('src')
-                 # Construct a full url. If the image url is relative,
-                 # it will be prepended with webpage domain.
-                 # If the image url is absolute, it will remain as is
-                 src = urljoin(url, src)
+        for image in images:
+            # Get image source url which can be absolute or relative
+            src = image.get('src')
+            # Construct a full url. If the image url is relative,
+            # it will be prepended with webpage domain.
+            # If the image url is absolute, it will remain as is
+            src = urljoin(url, src)
+              
+            # Get a base name, for example 'image.png' to name file locally
+            basename = os.path.basename(src)
              
-                 # Get a base name, for example 'image.png' to name file locally
-                 basename = os.path.basename(src)
-             
-                 if src not in singleton.downloaded:
-                     singleton.downloaded.add(src)
-                     print 'Downloading', src
-                     # Download image to local filesystem
-                     urllib.urlretrieve(src, os.path.join('images', basename))
-
-            print thread_name, 'finished downloading images from', url
+            if src not in singleton.downloaded:
+                 singleton.downloaded.add(src)
+                 print 'Downloading', src
+                 # Download image to local filesystem
+                 urllib.urlretrieve(src, os.path.join('images', basename))
+                     
+        print thread_name, 'finished downloading images from', url
 
 if __name__ == '__main__':
-    root = 'http://python.org'
+    root = 'http://localhost/ATRrepo/about.html'
     
     parsed_root = urlparse(root)
     
@@ -142,7 +143,6 @@ if __name__ == '__main__':
     thread1 = ImageDownloaderThread(1, "Thread-1", 1)
     thread2 = ImageDownloaderThread(2, "Thread-2", 2)
     
-    traverse_site()
     # Start new Threads
     thread1.start()
     thread2.start()
