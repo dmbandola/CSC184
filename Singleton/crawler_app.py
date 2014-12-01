@@ -6,9 +6,9 @@ CRAWLER = Singleton()
 
 @app.route('/')
 def hello_world():
-    url = request.args.get('url')
-    threading.Thread = CRAWLER.download_images('threading.Thread')
-    return CRAWLER.run()
+    download_images = CRAWLER.download_images(thread_name)
+    
+    return download_images
     
 if __name__ == '__main__':
     app.run(debug=True)
