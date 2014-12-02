@@ -4,6 +4,7 @@ Feature: An application that downloads images
         
         Scenario: Download images
         Given I enter the link url "http://localhost/ATRrepo/about.html" 
-        When I run crawler.py
-        Then I downloaded an image
-        
+        When I run the crawler and it sees the image:
+        	|image name|
+        	|"b.jpg"          |
+        Then
