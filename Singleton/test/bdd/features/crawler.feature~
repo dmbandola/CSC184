@@ -4,5 +4,4 @@ Feature: An application that downloads images
         
         Scenario: Download images
         Given I enter the link url "http://localhost/ATRrepo/about.html" 
-        When I run the crawler and it sees the image:
-        	"b.jpg"
+        When I run the crawler and it sees the image "b.jpg"
