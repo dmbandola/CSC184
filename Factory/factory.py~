@@ -127,4 +127,4 @@ if __name__ == '__main__':
     except urllib2.URLError, e:
         print 'Can not access resource with this method'
     else:
-        print connector.parse(content)
+print connector.parse(content)
