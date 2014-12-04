@@ -4,7 +4,11 @@ Feature: An application that downloads images
         
         Scenario: Download images
         Given I enter the link url "http://localhost/ATRrepo/about.html" 
-        When I run the crawler and it sees the image "b.jpg"
-        Then I see the downloaded image:
-        	| image_name |
-        	| b.jpg	  			|
+        When I run the crawler
+        Then I see the downloaded images "<image_name>"
+        	Examples:
+        		|image_name|
+        		|b.jpg			  |
+        		|c.jpg			  |
+        		|e.jpg			  |
+        		
