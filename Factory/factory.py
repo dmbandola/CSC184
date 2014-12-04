@@ -2,6 +2,10 @@ import abc
 import urllib2
 from BeautifulSoup import BeautifulStoneSoup
 
+class Web(object):
+    def __init__(self, resource):
+        self.resource = resource
+
 class Connector(object):
     """Abstract class to connect to remote resource."""
     __metaclass__ = abc.ABCMeta #Declares class as abstract class
@@ -109,18 +113,17 @@ class FTPPort(Port):
         return '21'
         
 if __name__ == '__main__':
-    domain = 'ftp.freebsd.org'
-    path = '/pub/FreeBSD/'
+    domain = 'localhost'
+    path = '/'
 
-    protocol = input('Connecting to {}. Which Protocol to use? (0-http,
-1-ftp): '.format(domain))
+    protocol = input('Connecting to {}. Which Protocol to use? (0-http, 1-ftp): '.format(domain))
 
     if protocol == 0:
         is_secure = bool(input('Use secure connection? (1-yes, 0-no): '))
         connector = HTTPConnector(is_secure)
-        else:
-            is_secure = False
-            connector = FTPConnector(is_secure)
+    else:
+        is_secure = False
+        connector = FTPConnector(is_secure)
 
     try:
         content = connector.read(domain, path)
