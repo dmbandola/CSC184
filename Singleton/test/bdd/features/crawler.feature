@@ -6,9 +6,9 @@ Feature: An application that downloads images
         Given I enter the link url "http://localhost/ATRrepo/about.html" 
         When I run the crawler
         Then I see the downloaded images "<image_name>"
-        	Examples:
+                Examples:
         		|image_name|
-        		|b.jpg			  |
-        		|c.jpg			  |
-        		|e.jpg			  |
+        		|b.jpg	   |
+        		|c.jpg	   |
+        		|e.jpg	   |
         		
