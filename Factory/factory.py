@@ -6,6 +6,19 @@ class Web(object):
     def __init__(self, resource):
         self.resource = resource
 
+def test(self):
+    domain = 'localhost'
+    path = '/'
+
+    protocol = 0
+
+    if protocol == 0:
+        is_secure = bool(0)
+        connector = HTTPConnector(is_secure)
+    else:
+        is_secure = False
+        connector = FTPConnector(is_secure)
+
 class Connector(object):
     """Abstract class to connect to remote resource."""
     __metaclass__ = abc.ABCMeta #Declares class as abstract class
