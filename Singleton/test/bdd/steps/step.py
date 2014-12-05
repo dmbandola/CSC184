@@ -4,8 +4,6 @@ from webtest import TestApp
 from crawler import *
 import os
 
-
-
 @step(u'Given I enter the link url "([^"]*)"')
 def given_i_enter_the_link_url_group1(step, url):
     link = Url(url)
@@ -17,5 +15,5 @@ def when_i_run_the_crawler(step):
     
 @step(u'Then I see the downloaded images "([^"]*)"')
 def then_i_see_the_downloaded_images_group1(step, image_name):
-    image = os.path.exists('/home/darin/Documents/CSC184/Singleton/images')
+    image = os.path.exists('/home/darin/Documents/CSC184/Singleton/images/' + image_name)
     assert_equal (image, True)

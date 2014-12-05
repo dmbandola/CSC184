@@ -17,5 +17,5 @@ def when_i_run_the_crawler(step):
     
 @step(u'Then I see the downloaded images "([^"]*)"')
 def then_i_see_the_downloaded_images_group1(step, image_name):
-    image = os.path.exists('/home/darin/Documents/CSC184/Singleton/images')
-    assert (image, True)
+    image = os.path.exists('/home/darin/Documents/CSC184/Singleton/images/' + image_name)
+    assert_equal (image, True)
