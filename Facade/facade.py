@@ -9,7 +9,7 @@ class WeatherProvider(object):
     def __init__(self):
         self.api_url = 'http://api.openweathermap.org/data/2.5/forecast?q={},{}'
         
-        def get_weather_data(self, city, country):
+    def get_weather_data(self, city, country):
         city = urllib.quote(city)
         url = self.api_url.format(city, country)
         return urllib2.urlopen(url).read()
@@ -33,8 +33,7 @@ class WeatherProvider(object):
             "temp": 278.64,
             },
         "dt_txt": "2013-10-26 06:00:00"
-        },
-        ...
+        }
     ]
 }
 
@@ -82,11 +81,13 @@ class Weather(object):
         
         for r in data:
             result += r
+
         self.temperature = result / len(data)
 
 class Facade(object):
     def get_forecast(self, city, country):
         cache = Cache('myfile')
+
         cache_result = cache.load()
         
         if cache_result:
