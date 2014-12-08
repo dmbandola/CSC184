@@ -4,5 +4,8 @@ Feature: An application that provides weather temperature in Celsius
 
 		Scenario: Get the weather of a city
 		Given I run the facade.py
-		And it finishes
-		Then I can see the temperature
+		When it finishes
+		Then I can see the temperature "<temperature>"
+			Examples:
+		    		|temperature|
+		    		|3.59625	|
