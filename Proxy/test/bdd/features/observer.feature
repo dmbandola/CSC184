@@ -5,10 +5,10 @@ Feature: An application that adds, removes and notififies the observers
 	
 	Scenario: Subscribe a subject
 	Given I have a subject
-	When I subcribe in the subject 
-	Then I will be notified
+	When I subscribe to a subject 
+	Then I will receive notifications
 
 	Scenario: Unsubscribe a subject
-	Given I have a subject where I subcribed
-	When I unsubscribe in the subject
+	Given I subscribed to a subject
+	When I unsubscribe a subject
 	Then I will not receive any notifications
