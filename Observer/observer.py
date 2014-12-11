@@ -38,7 +38,7 @@ class USATimeObserver(Observer):
 		self.name = name
 
 	def notify(self, unix_timestamp):
-		time = datetime.datetime.fromtimestamp(int(unix_timestamp)).strftime('%Y-%m-%d %I:%M:%S%p')
+		time = datetime.datetime.fromtimestamp(int(unix_timestamp)).strftime('%Y-%m-%d %I:%M:%p')
 		print 'Observer', self.name, 'says:', time
 
 class EUTimeObserver(Observer):
@@ -46,7 +46,7 @@ class EUTimeObserver(Observer):
 		self.name = name
 
 	def notify(self, unix_timestamp):
-		time = datetime.datetime.fromtimestamp(int(unix_timestamp)).strftime('%Y-%m-%d %H:%M:%S')
+		time = datetime.datetime.fromtimestamp(int(unix_timestamp)).strftime('%Y-%m-%d %H:%M')
 		print 'Observer', self.name, 'says:', time
 
 
